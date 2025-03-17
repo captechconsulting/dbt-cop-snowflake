@@ -1,0 +1,188 @@
+version: 2
+
+sources:
+  - name: tpch_sf1
+    database: snowflake_sample_data
+    schema: tpch_sf1
+    tables:
+      - name: customer
+      - name: lineitem
+      - name: nation
+      - name: orders
+      - name: part
+      - name: partsupp
+      - name: region
+      - name: supplier
+
+models:
+  - name: stg_tpch_sf1__customers
+    description: "Customers table including customer details"
+    columns:
+      - name: CUSTOMER_key
+        description: "Primary key for customers"
+        tests:
+          - unique
+          - not_null
+      - name: CUSTOMER_name
+        description: "Customer name"
+      - name: CUSTOMER_address
+        description: "Customer address"
+      - name: CUSTOMER_nation_key
+        description: "Primary key for nation"
+      - name: CUSTOMER_phone
+        description: "Customer phone number"
+      - name: CUSTOMER_ACCOUNT_BALANCE
+        description: "Account balance"
+      - name: CUSTOMER_MARKET_SEGMENT
+        description: "Market segment"
+      - name: CUSTOMER_comment
+        description: "Comments about the customer"
+
+  - name: stg_tpch_sf1__orders
+    description: "Orders table including order details"
+    columns:
+      - name: order_key
+        description: "Primary key for orders"
+        tests:
+          - unique
+          - not_null
+      - name: CUSTOMER_key
+        description: "Foreign key referencing customers"
+      - name: order_status
+        description: "Order status"
+      - name: total_price
+        description: "Total price of the order"
+      - name: order_date
+        description: "Date the order was placed"
+      - name: order_priority
+        description: "Priority of the order"
+      - name: clerk
+        description: "Clerk who processed the order"
+      - name: ship_priority
+        description: "Shipping priority"
+      - name: order_comment
+        description: "Comments about the order"
+
+  - name: stg_tpch_sf1__lineitems
+    description: "Line items table including details of each item in the orders"
+    columns:
+      - name: order_key
+        description: "Foreign key referencing orders"
+      - name: part_key
+        description: "Foreign key referencing parts"
+      - name: supplier_key
+        description: "Foreign key referencing suppliers"
+      - name: line_number
+        description: "Line item number"
+      - name: quantity
+        description: "Quantity ordered"
+      - name: extended_price
+        description: "Extended price of the line item"
+      - name: discount
+        description: "Discount applied to the line item"
+      - name: tax
+        description: "Tax applied to the line item"
+      - name: return_flag
+        description: "Return flag"
+      - name: linestatus
+        description: "Status of the line item"
+      - name: ship_date
+        description: "Date of shipping"
+      - name: commit_date
+        description: "Committed date"
+      - name: receipt_date
+        description: "Receipt date"
+      - name: ship_instructions
+        description: "Shipping instructions"
+      - name: ship_mode
+        description: "Shipping mode"
+      - name: line_comment
+        description: "Comments about the line item"
+
+  - name: stg_tpch_sf1__nations
+    description: "Nation table including details of each nation"
+    columns:
+      - name: nation_key
+        description: "Primary key for nation"
+        tests:
+          - unique
+          - not_null
+      - name: nation_name
+        description: "Nation name"
+      - name: nation_region_key
+        description: "Foreign key referencing region"
+      - name: nation_comment
+        description: "Comments about the nation"
+
+  - name: stg_tpch_sf1__parts
+    description: "Part table including details of each part"
+    columns:
+      - name: part_key
+        description: "Primary key for part"
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: "Part name"
+      - name: part_mfgr
+        description: "Manufacturer"
+      - name: part_brand
+        description: "Brand"
+      - name: part_type
+        description: "Type"
+      - name: part_size
+        description: "Size"
+      - name: part_container
+        description: "Container"
+      - name: part_retail_price
+        description: "Retail price"
+      - name: part_comment
+        description: "Comments about the part"
+
+  - name: stg_tpch_sf1__partsupps
+    description: "Part supplier table including details of each part supplier"
+    columns:
+      - name: part_key
+        description: "Foreign key referencing part"
+      - name: supplier_key
+        description: "Foreign key referencing supplier"
+      - name: available_quantity
+        description: "Available quantity"
+      - name: supply_cost
+        description: "Supply cost"
+      - name: PART_SUPPLY_COMMENT
+        description: "Comments about the part supplier"
+
+  - name: stg_tpch_sf1__regions
+    description: "Region table including details of each region"
+    columns:
+      - name: region_key
+        description: "Primary key for region"
+        tests:
+          - unique
+          - not_null
+      - name: region_name
+        description: "Region name"
+      - name: region_comment
+        description: "Comments about the region"
+
+  - name: stg_tpch_sf1__suppliers
+    description: "Supplier table including details of each supplier"
+    columns:
+      - name: supplier_key
+        description: "Primary key for supplier"
+        tests:
+          - unique
+          - not_null
+      - name: supplier_name
+        description: "Supplier name"
+      - name: supplier_address
+        description: "Supplier address"
+      - name: supplier_nationkey
+        description: "Foreign key referencing nation"
+      - name: supplier_phone
+        description: "Supplier phone number"
+      - name: SUPPLIER_ACCOUNT_BALANCE
+        description: "Account balance"
+      - name: supplier_comment
+        description: "Comments about the supplier"
