@@ -10,4 +10,4 @@ SELECT
   sum(tax_rate * extended_price) AS total_tax
 
 FROM lineitems
-GROUP BY part_key
+GROUP BY 1

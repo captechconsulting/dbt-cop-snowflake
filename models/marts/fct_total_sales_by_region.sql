@@ -22,4 +22,4 @@ from orders as o
 inner join customers as c on o.customer_key = c.customer_key
 inner join nations as n on c.customer_nation_key = n.nation_key
 inner join regions as r on n.nation_region_key = r.region_key
-group by r.region_key, r.region_name
+group by 1, 2
