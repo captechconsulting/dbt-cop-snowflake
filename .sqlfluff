@@ -4,6 +4,7 @@ runaway_limit = 10
 max_line_length = 80
 indent_unit = space
 dialect = snowflake
+exclude_rules = layout.indent, layout.cte_bracket, layout.select_targets, layout.spacing
 
 [sqlfluff:indentation]
 tab_space_size = 4
@@ -35,3 +36,6 @@ capitalisation_policy = lower
 
 [sqlfluff:rules:ambiguous.column_references]  # Number in group by
 group_by_and_order_by_style = implicit
+
+[sqlfluff:rules:convention.terminator]
+multiline_newline = True
