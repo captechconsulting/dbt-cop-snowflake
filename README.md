@@ -80,7 +80,7 @@ In order to successfully run these dbt models, you will need to complete the fol
              dev:
                account: OCMUXFQ-CAPTECH_PARTNER # our Snowflake account
                database: DBT_COP_LEARNING
-               user: {your user name} # you can find this 
+               user: {your user name} # you can find this in the Snowflake console
                authenticator: externalbrowser # this lets us use SSO for authentication with Snowflake
                warehouse: XS_WH # default warehouse, should be plenty of compute and keeps costs low
                role: APG_SNOWFLAKE_USERS # role accessible to us as non-admins
