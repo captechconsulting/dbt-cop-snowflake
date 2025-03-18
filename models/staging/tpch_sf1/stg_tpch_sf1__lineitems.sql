@@ -4,7 +4,8 @@ with source as (
 
 renamed as (
     select
-        {{ dbt_utils.generate_surrogate_key(['L_ORDERKEY', 'L_LINENUMBER']) }} as order_item_key,
+        {{ dbt_utils.generate_surrogate_key(['L_ORDERKEY', 'L_LINENUMBER']) }}
+            as order_item_key,
         {{ adapter.quote("L_ORDERKEY") }} as order_key,
         {{ adapter.quote("L_PARTKEY") }} as part_key,
         {{ adapter.quote("L_SUPPKEY") }} as supplier_key,

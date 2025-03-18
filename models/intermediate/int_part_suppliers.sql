@@ -1,8 +1,3 @@
-{{
-    config(
-        materialized = 'table'
-    )
-}}
 with parts as (
 
     select * from {{ ref('stg_tpch_sf1__parts') }}
