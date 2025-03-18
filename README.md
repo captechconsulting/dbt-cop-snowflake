@@ -58,11 +58,17 @@ In order to successfully run these dbt models, you will need to complete the fol
 6. **Configure dbt**
 
     Now that we have our dependencies installed, our dev environment is almost complete. To find your Snowflake username, which should be the same as your CapTech email address without the domain (e.g. testuser@captechconsulting.com -> TESTUSER in Snowflake), you can visit your Profile page by following these two steps:
-    ![alt text](resources/snowflake_profile.png)
+    ![find your Snowflake username](resources/snowflake_profile.png)
 
-    In the resulting popup, you should see your Username.
+    In the resulting popup, you should see your Username. While you are in the Snowflake console, go ahead and create a new schema for yourself within the DBT_COP_LEARNING database - use your Username as the Schema name. If you select the DBT_COP_LEARNING database in the Data tab, you can create a schema using the Snowflake UI:
     
-    The last thing we need to do is make sure the local installation of dbt knows what to connect to. This is accomplished via a profile, which can be set up two ways:
+    ![create schema](resources/snowflake_create_schema.png)
+
+    You can also create a schema via a Snowflake worksheet if you are comfortable with SQL. Ensure you are using the correct role - `APG_SNOWFLAKE_USERS` - and run `CREATE SCHEMA DBT_COP_LEARNING.{your_username}` in a Snowflake worksheet or notebook. This will ensure the `APG_SNOWFLAKE_USERS` role owns the Schema, which should help prevent any permissions issues from popping up.
+
+    ![switching your Snowflake role](resources/snowflake_role.png)
+
+    Now that we have our schema, we are ready to tell our local dbt-core installation how to connect to our specific database. This is accomplished via a profile, which can be set up two ways:
 
      - You can run a dbt command in your repository terminal, e.g. `dbt debug`. If you don't have a profile file, you will be prompted in the command line to populate all of your information. dbt will then create and save that information to ~/.dbt/profiles.yml Please reference below for the proper values to use - you won't need to add a password, as we are relying on SSO authentication.
     
