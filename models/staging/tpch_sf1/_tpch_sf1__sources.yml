@@ -18,24 +18,24 @@ models:
   - name: stg_tpch_sf1__customers
     description: "Customers table including customer details"
     columns:
-      - name: CUSTOMER_key
+      - name: customer_key
         description: "Primary key for customers"
         tests:
           - unique
           - not_null
-      - name: CUSTOMER_name
+      - name: customer_name
         description: "Customer name"
-      - name: CUSTOMER_address
+      - name: customer_address
         description: "Customer address"
-      - name: CUSTOMER_nation_key
+      - name: customer_nation_key
         description: "Primary key for nation"
-      - name: CUSTOMER_phone
+      - name: customer_phone
         description: "Customer phone number"
-      - name: CUSTOMER_ACCOUNT_BALANCE
+      - name: customer_ACCOUNT_BALANCE
         description: "Account balance"
-      - name: CUSTOMER_MARKET_SEGMENT
+      - name: customer_market_segment
         description: "Market segment"
-      - name: CUSTOMER_comment
+      - name: customer_comment
         description: "Comments about the customer"
 
   - name: stg_tpch_sf1__orders
@@ -46,8 +46,12 @@ models:
         tests:
           - unique
           - not_null
-      - name: CUSTOMER_key
+      - name: customer_key
         description: "Foreign key referencing customers"
+        tests:
+          - relationships:
+              to: source('tpch_sf1', 'customer')
+              field: c_custkey
       - name: order_status
         description: "Order status"
       - name: total_price
@@ -68,10 +72,22 @@ models:
     columns:
       - name: order_key
         description: "Foreign key referencing orders"
+        tests:
+          - relationships:
+              to: source('tpch_sf1', 'orders')
+              field: o_orderkey
       - name: part_key
         description: "Foreign key referencing parts"
+        tests:
+          - relationships:
+              to: source('tpch_sf1', 'part')
+              field: p_partkey
       - name: supplier_key
         description: "Foreign key referencing suppliers"
+        tests:
+          - relationships:
+              to: source('tpch_sf1', 'supplier')
+              field: s_suppkey
       - name: line_number
         description: "Line item number"
       - name: quantity
@@ -122,7 +138,7 @@ models:
         tests:
           - unique
           - not_null
-      - name: name
+      - name: part_name
         description: "Part name"
       - name: part_mfgr
         description: "Manufacturer"
@@ -144,13 +160,21 @@ models:
     columns:
       - name: part_key
         description: "Foreign key referencing part"
+        tests:
+          - relationships:
+              to: source('tpch_sf1', 'part')
+              field: p_partkey
       - name: supplier_key
         description: "Foreign key referencing supplier"
+        tests:
+          - relationships:
+              to: source('tpch_sf1', 'suppliers')
+              field: s_suppkey
       - name: available_quantity
         description: "Available quantity"
       - name: supply_cost
         description: "Supply cost"
-      - name: PART_SUPPLY_COMMENT
+      - name: part_supply_comment
         description: "Comments about the part supplier"
 
   - name: stg_tpch_sf1__regions
@@ -178,11 +202,15 @@ models:
         description: "Supplier name"
       - name: supplier_address
         description: "Supplier address"
-      - name: supplier_nationkey
+      - name: supplier_nation_key
         description: "Foreign key referencing nation"
+        tests:
+          - relationships:
+              to: source('tpch_sf1', 'nation')
+              field: n_nationkey
       - name: supplier_phone
         description: "Supplier phone number"
-      - name: SUPPLIER_ACCOUNT_BALANCE
+      - name: supplier_account_balance
         description: "Account balance"
       - name: supplier_comment
         description: "Comments about the supplier"

@@ -4,6 +4,10 @@ with source as (
 
 renamed as (
     select
+        
+            
+            {{ dbt_utils.generate_surrogate_key(['PS_PARTKEY', 'PS_SUPPKEY']) }}
+            as part_supplier_key,
         {{ adapter.quote("PS_PARTKEY") }} as part_key,
         {{ adapter.quote("PS_SUPPKEY") }} as supplier_key,
         {{ adapter.quote("PS_AVAILQTY") }} as available_quantity,

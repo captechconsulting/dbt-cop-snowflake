@@ -24,7 +24,6 @@ part_suppliers as (
 select
 
 
-
     {{ dbt_utils.generate_surrogate_key(['p.PART_KEY', 's.SUPPLIER_KEY']) }}
         as part_supplier_key,
 

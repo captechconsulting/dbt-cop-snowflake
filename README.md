@@ -3,10 +3,12 @@ Hello, and welcome to the dbt CoP-sponsored learning repository. This repo highl
 
 ## Getting Started
 
+In order to successfully run these dbt models, we will need to 
+![alt text](resources/snowflake_login.png)
 ### Prerequisites
-- Python 3.7 or higher
+- Python 3.11 or higher
 - Virtual environment tool (e.g., `venv` or `virtualenv`)
-- dbt (data build tool)
+- dbt
 - Snowflake account
 
 ### Steps
@@ -25,25 +27,24 @@ Hello, and welcome to the dbt CoP-sponsored learning repository. This repo highl
 
 3. **Install dbt and Other Dependencies**
     ```sh
-    pip install dbt
-    pip install -r requirements.txt  # If you have additional dependencies listed in a requirements file
+    pip install -r requirements.txt
     ```
 
 4. **Configure dbt**
-    - Create a `profiles.yml` file in the `~/.dbt/` directory (create the directory if it doesn't exist).
+    - Create a `profiles.yml` file in the `~/.dbt/` directory (create the directory if it doesn't exist). Alternatively, you can attempt to run a dbt command in the repository - if you don't have a profile file, you will be prompted in the command line to populate all of your information. If you choose the latter option, ensure you use the same values as denoted below.
     - Add the following configuration to the `profiles.yml` file:
         ```yaml
         dbt_cop_snowflake:
           outputs:
             dev:
-              account: OCMUXFQ-CAPTECH_PARTNER
+              account: OCMUXFQ-CAPTECH_PARTNER # our Snowflake account
               database: DBT_COP_LEARNING
               schema: START_HERE
               user: {your user name}
-              authenticator: externalbrowser
-              warehouse: XS_WH
-              role: APG_SNOWFLAKE_USERS
-              threads: 1
+              authenticator: externalbrowser # this lets us use SSO for authentication with Snowflake
+              warehouse: XS_WH # default warehouse, should be plenty of compute and keeps costs low
+              role: APG_SNOWFLAKE_USERS # role accessible to us as non-admins
+              threads: 2 # enables multithreading
               type: snowflake
           target: dev
         ```
