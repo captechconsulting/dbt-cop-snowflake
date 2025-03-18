@@ -8,6 +8,7 @@ In order to successfully run these dbt models, you will need to complete the fol
 ### Steps
 
 1. **Snowflake Access**
+
     First, you will need to be able to log in to Snowflake. There is a ServiceDesk ticket available for this, specifically [Request Access to the Snowflake Partner SandboxTemplate](https://support.captechventures.com/WorkOrder.do?woMode=newWO&reqTemplate=26101). For a description, you can indicate you are looking to access training materials from the dbt CoP.
 
     Once you have access to Snowflake, please log in using [this link](https://capte.ch/snowflake). From the Home screen, navigate to the Data tab, which should show a list of databases available. The dbt CoP has created the `DBT_COP_LEARNING` database, with a conveniently titled `START_HERE` example schema, to store all the tables and views defined by the sql files within the models directory.

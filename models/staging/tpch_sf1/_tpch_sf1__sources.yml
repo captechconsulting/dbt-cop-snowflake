@@ -1,5 +1,8 @@
 version: 2
 
+# This defines the database, schema, and tables we are trying to ingest from.
+# For every schema you want to ingest, you need to declare a source.
+# In our case, our sample db only contains one schema to ingest from.
 sources:
   - name: tpch_sf1
     database: snowflake_sample_data
@@ -14,76 +17,81 @@ sources:
       - name: region
       - name: supplier
 
+# These define the first-level tables and/or views that we will be generating.
+# In addition to declaring a schema for each model, note that we can also define
+# tests (dbt terminology for these would be "data tests") to run against the data.
+# We are using native dbt tests, unique, relationships, and not_null, but we
+# can also define custom tests to run against our data.
 models:
   - name: stg_tpch_sf1__customers
     description: "Customers table including customer details"
     columns:
       - name: customer_key
-        description: "Primary key for customers"
+        description: "{{ doc('customer_key') }}"
         tests:
           - unique
           - not_null
       - name: customer_name
-        description: "Customer name"
+        description: "{{ doc('customer_name') }}"
       - name: customer_address
-        description: "Customer address"
+        description: "{{ doc('customer_address') }}"
       - name: customer_nation_key
-        description: "Primary key for nation"
+        description: "{{ doc('customer_nation_key') }}"
       - name: customer_phone
-        description: "Customer phone number"
-      - name: customer_ACCOUNT_BALANCE
-        description: "Account balance"
+        description: "{{ doc('customer_phone') }}"
+      - name: customer_account_balance
+        description: "{{ doc('customer_account_balance') }}"
       - name: customer_market_segment
-        description: "Market segment"
+        description: "{{ doc('customer_market_segment') }}"
       - name: customer_comment
-        description: "Comments about the customer"
+        description: "{{ doc('customer_comment') }}"
 
   - name: stg_tpch_sf1__orders
     description: "Orders table including order details"
     columns:
       - name: order_key
-        description: "Primary key for orders"
+        description: "{{ doc('order_key') }}"
         tests:
           - unique
           - not_null
       - name: customer_key
-        description: "Foreign key referencing customers"
+        description: "{{ doc('customer_key') }}"
         tests:
           - relationships:
               to: source('tpch_sf1', 'customer')
               field: c_custkey
       - name: order_status
-        description: "Order status"
+        description: "{{ doc('order_status') }}"
       - name: total_price
-        description: "Total price of the order"
+        description: "{{ doc('total_price') }}"
       - name: order_date
-        description: "Date the order was placed"
+        description: "{{ doc('order_date') }}"
       - name: order_priority
-        description: "Priority of the order"
+        description: "{{ doc('order_priority') }}"
       - name: clerk
-        description: "Clerk who processed the order"
+        description: "{{ doc('clerk') }}"
       - name: ship_priority
-        description: "Shipping priority"
+        description: "{{ doc('ship_priority') }}"
       - name: order_comment
-        description: "Comments about the order"
+        description: "{{ doc('order_comment') }}"
 
   - name: stg_tpch_sf1__lineitems
     description: "Line items table including details of each item in the orders"
     columns:
       - name: order_key
-        description: "Foreign key referencing orders"
+        description: "{{ doc('order_key') }}"
         tests:
           - relationships:
               to: source('tpch_sf1', 'orders')
               field: o_orderkey
       - name: part_key
-        description: "Foreign key referencing parts"
+        description: "{{ doc('part_key') }}"
         tests:
           - relationships:
               to: source('tpch_sf1', 'part')
               field: p_partkey
       - name: supplier_key
-        description: "Foreign key referencing suppliers"
+        description: "{{ doc('supplier_key') }}"
         tests:
           - relationships:
               to: source('tpch_sf1', 'supplier')
@@ -119,98 +127,98 @@ models:
     description: "Nation table including details of each nation"
     columns:
       - name: nation_key
-        description: "Primary key for nation"
+        description: "{{ doc('nation_key') }}"
         tests:
           - unique
           - not_null
       - name: nation_name
-        description: "Nation name"
+        description: "{{ doc('nation_name') }}"
       - name: nation_region_key
-        description: "Foreign key referencing region"
+        description: "{{ doc('nation_region_key') }}"
       - name: nation_comment
-        description: "Comments about the nation"
+        description: "{{ doc('nation_comment') }}"
 
   - name: stg_tpch_sf1__parts
     description: "Part table including details of each part"
     columns:
       - name: part_key
-        description: "Primary key for part"
+        description: "{{ doc('part_key') }}"
         tests:
           - unique
           - not_null
       - name: part_name
-        description: "Part name"
+        description: "{{ doc('part_name') }}"
       - name: part_mfgr
-        description: "Manufacturer"
+        description: "{{ doc('part_mfgr') }}"
       - name: part_brand
-        description: "Brand"
+        description: "{{ doc('part_brand') }}"
       - name: part_type
-        description: "Type"
+        description: "{{ doc('part_type') }}"
       - name: part_size
-        description: "Size"
+        description: "{{ doc('part_size') }}"
       - name: part_container
-        description: "Container"
+        description: "{{ doc('part_container') }}"
       - name: part_retail_price
-        description: "Retail price"
+        description: "{{ doc('part_retail_price') }}"
       - name: part_comment
-        description: "Comments about the part"
+        description: "{{ doc('part_comment') }}"
 
   - name: stg_tpch_sf1__partsupps
     description: "Part supplier table including details of each part supplier"
     columns:
       - name: part_key
-        description: "Foreign key referencing part"
+        description: "{{ doc('part_key') }}"
         tests:
           - relationships:
               to: source('tpch_sf1', 'part')
               field: p_partkey
       - name: supplier_key
-        description: "Foreign key referencing supplier"
+        description: "{{ doc('supplier_key') }}"
         tests:
           - relationships:
               to: source('tpch_sf1', 'suppliers')
               field: s_suppkey
       - name: available_quantity
-        description: "Available quantity"
+        description: "{{ doc('available_quantity') }}"
       - name: supply_cost
-        description: "Supply cost"
+        description: "{{ doc('supply_cost') }}"
       - name: part_supply_comment
-        description: "Comments about the part supplier"
+        description: "{{ doc('part_supply_comment') }}"
 
   - name: stg_tpch_sf1__regions
     description: "Region table including details of each region"
     columns:
       - name: region_key
-        description: "Primary key for region"
+        description: "{{ doc('region_key') }}"
         tests:
           - unique
           - not_null
       - name: region_name
-        description: "Region name"
+        description: "{{ doc('region_name') }}"
       - name: region_comment
-        description: "Comments about the region"
+        description: "{{ doc('region_comment') }}"
 
   - name: stg_tpch_sf1__suppliers
     description: "Supplier table including details of each supplier"
     columns:
       - name: supplier_key
-        description: "Primary key for supplier"
+        description: "{{ doc('supplier_key') }}"
         tests:
           - unique
           - not_null
       - name: supplier_name
-        description: "Supplier name"
+        description: "{{ doc('supplier_name') }}"
       - name: supplier_address
-        description: "Supplier address"
+        description: "{{ doc('supplier_address') }}"
       - name: supplier_nation_key
-        description: "Foreign key referencing nation"
+        description: "{{ doc('supplier_nation_key') }}"
         tests:
           - relationships:
               to: source('tpch_sf1', 'nation')
               field: n_nationkey
       - name: supplier_phone
-        description: "Supplier phone number"
+        description: "{{ doc('supplier_phone') }}"
       - name: supplier_account_balance
-        description: "Account balance"
+        description: "{{ doc('supplier_account_balance') }}"
       - name: supplier_comment
-        description: "Comments about the supplier"
+        description: "{{ doc('supplier_comment') }}"
