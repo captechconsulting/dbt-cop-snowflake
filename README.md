@@ -9,7 +9,7 @@ In order to successfully run these dbt models, you will need to complete the fol
 
 1. **Snowflake Access**
 
-    First, you will need to be able to log in to Snowflake. There is a ServiceDesk ticket available for this, specifically [Request Access to the Snowflake Partner SandboxTemplate](https://support.captechventures.com/WorkOrder.do?woMode=newWO&reqTemplate=26101). For a description, you can indicate you are looking to access training materials from the dbt CoP.
+    First, you will need to be able to log in to Snowflake. There is a ServiceDesk ticket available for this, specifically [Request Access to the Snowflake Partner Sandbox](https://support.captechventures.com/WorkOrder.do?woMode=newWO&reqTemplate=26101). For a description, you can indicate you are looking to access training materials from the dbt CoP.
 
     Once you have access to Snowflake, please log in using [this link](https://capte.ch/snowflake). From the Home screen, navigate to the Data tab, which should show a list of databases available. The dbt CoP has created the `DBT_COP_LEARNING` database, with a conveniently titled `START_HERE` example schema, to store all the tables and views defined by the sql files within the models directory.
 
@@ -90,18 +90,20 @@ In order to successfully run these dbt models, you will need to complete the fol
            target: dev
          ```
 
-    Regardless of the method you chose, you should run the below commands in your IDE terminal. The first validates your connection to Snowflake, while the second ensures you have all 
+    Regardless of the method you chose, you should run the below commands in your IDE terminal. The first validates your connection to Snowflake, while the second ensures you have all dbt dependencies installed.
     
     - Test your connection:
         ```sh
         dbt debug
         ```
-    - Install dependencies:
+    - Install dbt dependencies - note, these are separate from our *Python* dependencies:
         ```sh
         dbt deps
         ```
 
-    Our Snowflake account does not have MFA token caching enabled, which means every time we run a dbt command, you will see a browser window open up for authentication. You don't need to do anything, but don't be alarmed when you see a window like below:
+    We are making use of the [dbt_utils package](https://github.com/dbt-labs/dbt-utils?tab=readme-ov-file#generate_surrogate_key-source), the most popular external package for dbt. It contains a number of helpful macros and tests, you can find the full list in the project README.
+
+    One other note - our Snowflake account does not have MFA token caching enabled, which means every time we run a dbt command, you will see a browser window open up for authentication. You don't need to do anything, but don't be alarmed when you see a window like below:
 
     ![Snowflake SSO authentication](resources/snowflake_login.png)
 
