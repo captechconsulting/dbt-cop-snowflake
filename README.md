@@ -37,6 +37,8 @@ In order to successfully run these dbt models, you will need to complete the fol
 
     This repository operates under the assumption you are using VS Code as your IDE. If you don't have an IDE installed, or have no idea what that means, go ahead and [download VS Code here](https://code.visualstudio.com/download). Once you install the application, open the application and 'Open' the cloned repository. For Mac users, this would be cmd-O, while for Windows it is ctrl-K ctrl-O. If you aren't using VS Code, you probably know what you're doing as far as opening a repository directory.
 
+    **dbt announced 3/19/2025 that it will be creating a VS Code extension. Once this is finalized, add installation/configuration steps for the new extension.**
+
 4. **Create and Activate a Virtual Environment**
 
     A virtual environment is an isolated environment for Python projects. It allows you to manage dependencies for your project separately from the global Python environment. This means you can have different versions of packages for different projects without conflicts. To create and activate a virtual environment, run the following commands in the VS Code terminal window (ctrl-` on both operating systems, if you don't see a terminal):
