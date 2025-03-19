@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Dimension table for customers"
+    columns:
+      - name: customer_key
+        description: "{{ doc('customer_key') }}"
+      - name: customer_name
+        description: "{{ doc('customer_name') }}"
+      - name: customer_address
+        description: "{{ doc('customer_address') }}"
+      - name: customer_nation_key
+        description: "{{ doc('customer_nation_key') }}"
+      - name: customer_phone
+        description: "{{ doc('customer_phone') }}"
+      - name: customer_account_balance
+        description: "{{ doc('customer_account_balance') }}"
+      - name: customer_market_segment
+        description: "{{ doc('customer_market_segment') }}"
+      - name: customer_comment
+        description: "{{ doc('customer_comment') }}"

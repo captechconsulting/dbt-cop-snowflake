@@ -1,6 +1,6 @@
 {
-    "dbt.queryLimit": 100,
     "files.associations": {
         "*.sql": "jinja-sql"
     },
+    "editor.formatOnSave": true
 }

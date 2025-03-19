@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: fct_total_sales_by_region
+    description: "Fact table for total sales by region"
+    columns:
+      - name: region_key
+        description: "{{ doc('region_key') }}"
+      - name: region_name
+        description: "{{ doc('region_name') }}"
+      - name: total_sales
+        description: "Total sales amount"

@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Fact table for orders"
+    columns:
+      - name: order_key
+        description: "{{ doc('order_key') }}"
+      - name: order_date
+        description: "{{ doc('order_date') }}"
+      - name: customer_key
+        description: "{{ doc('customer_key') }}"
+      - name: order_status
+        description: "{{ doc('order_status') }}"
+      - name: order_priority
+        description: "{{ doc('order_priority') }}"
+      - name: clerk
+        description: "{{ doc('clerk') }}"
+      - name: ship_priority
+        description: "{{ doc('ship_priority') }}"
+      - name: order_count
+        description: "Number of orders"
+      - name: gross_item_sales_amount
+        description: "Gross sales amount of items"
+      - name: item_discount_amount
+        description: "Discount amount on items"
+      - name: item_tax_amount
+        description: "Tax amount on items"
+      - name: net_item_sales_amount
+        description: "Net sales amount of items"

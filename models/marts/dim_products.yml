@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: "Dimension table for products"
+    columns:
+      - name: part_key
+        description: "{{ doc('part_key') }}"
+      - name: part_name
+        description: "{{ doc('part_name') }}"
+      - name: part_mfgr
+        description: "{{ doc('part_mfgr') }}"
+      - name: part_brand
+        description: "{{ doc('part_brand') }}"
+      - name: part_type
+        description: "{{ doc('part_type') }}"
+      - name: part_size
+        description: "{{ doc('part_size') }}"
+      - name: part_container
+        description: "{{ doc('part_container') }}"
+      - name: part_retail_price
+        description: "{{ doc('part_retail_price') }}"
+      - name: part_comment
+        description: "{{ doc('part_comment') }}"

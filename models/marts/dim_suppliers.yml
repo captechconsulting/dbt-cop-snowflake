@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: dim_suppliers
+    description: "Dimension table for suppliers"
+    columns:
+      - name: supplier_key
+        description: "{{ doc('supplier_key') }}"
+      - name: supplier_name
+        description: "{{ doc('supplier_name') }}"
+      - name: supplier_address
+        description: "{{ doc('supplier_address') }}"
+      - name: supplier_nation_key
+        description: "{{ doc('supplier_nation_key') }}"
+      - name: supplier_phone
+        description: "{{ doc('supplier_phone') }}"
+      - name: supplier_account_balance
+        description: "{{ doc('supplier_account_balance') }}"
+      - name: supplier_comment
+        description: "{{ doc('supplier_comment') }}"

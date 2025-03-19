@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: fct_total_sales_by_product
+    description: "Fact table for total sales by product"
+    columns:
+      - name: part_key
+        description: "{{ doc('part_key') }}"
+      - name: total_sales
+        description: "Total sales amount"
+      - name: total_quantity
+        description: "Total quantity sold"
+      - name: total_discount
+        description: "Total discount amount"
+      - name: total_tax
+        description: "Total tax amount"

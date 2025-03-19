@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: dim_dates
+    description: "Dimension table for dates"
+    columns:
+      - name: sk_date
+        description: "Surrogate key for the date"
+      - name: d_date
+        description: "Date"
+      - name: d_year
+        description: "Year"
+      - name: d_month
+        description: "Month"
+      - name: d_day
+        description: "Day"
+      - name: d_dayname
+        description: "Day name"
+      - name: d_dayofweek
+        description: "Day of the week"
+      - name: d_quarter
+        description: "Quarter"
+      - name: d_dayofyear
+        description: "Day of the year"

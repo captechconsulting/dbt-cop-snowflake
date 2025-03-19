@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: fct_order_fulfillment_time
+    description: "Fact table for order fulfillment time"
+    columns:
+      - name: order_key
+        description: "{{ doc('order_key') }}"
+      - name: fulfillment_time
+        description: "Time taken to fulfill the order (in days)"
